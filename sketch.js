@@ -4,9 +4,10 @@ const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
 
 var engine, world;
-var box1, pig1,pig3;
+var box1, npc1;
 var backgroundImg,platform;
-var bird, slingshot;
+var pc1, slingshot;
+
 
 var gameState = "onSling";
 var bg = "sprites/bg1.png";
@@ -25,16 +26,16 @@ function setup(){
     ground = new Ground(600,height,1200,20);
    // platform = new Ground(150, 305, 300, 170);
 
-    box1 = new Box(700,320,70,70);
+    //box1 = new Box(700,320,70,70);
     box2 = new Box(920,320,70,70);
-    npc1 = new Pig(810, 350);
+    npc1 = new Npc(810, 350);
 
     box3 = new Box(700,240,70,70);
     box4 = new Box(920,240,70,70);
 
     box5 = new Box(810,160,70,70);
 
-    pc1 = new Bird(200,50);
+    pc1 = new Pc(200,50);
 
     //log6 = new Log(230,180,80, PI/2);
 }
@@ -50,7 +51,7 @@ function draw(){
     
     Engine.update(engine);
     //strokeWeight(4);
-    box1.display();
+   // box1.display();
     box2.display();
     ground.display();
     npc1.display();
@@ -62,15 +63,11 @@ function draw(){
     box5.display();
 
     pc1.display(); 
+
+    chooseCharacter();
 }
 
-function keyPressed(){
-   if(keyCode === 32){
-        Matter.Body.setPosition(bird.body,{x:200,y:50});
-        bird.trajectory = [];
-        slingshot.attach(bird.body);
-     } 
-}
+
 
 async function getBackgroundImg(){
     var response = await fetch("http://worldtimeapi.org/api/timezone/Asia/Kolkata");
@@ -88,4 +85,10 @@ async function getBackgroundImg(){
 
     backgroundImg = loadImage(bg);
     console.log(backgroundImg);
+}
+
+function chooseCharacter(){
+    if(keyCode === 79){
+        pc1.changeAnimation("sprites/jotaro.gif");
+    }
 }

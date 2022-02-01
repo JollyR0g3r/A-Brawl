@@ -1,6 +1,6 @@
-class Pig extends BaseClass {
+class Npc extends BaseClass {
   constructor(x, y){
-    super(x,y,50,50);
+    super(x,y,350,350);
     this.image = loadImage("sprites/goku_13.gif");
     this.Visiblity = 255;
   }
